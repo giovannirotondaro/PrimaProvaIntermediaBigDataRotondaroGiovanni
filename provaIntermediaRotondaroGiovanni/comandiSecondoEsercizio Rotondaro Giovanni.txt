@@ -1,0 +1,12 @@
+create database provaIntermedia;
+use provaintermedia;
+
+create table if not exists persona(nome string, cognome string, eta int,luogoAbitazione string) row format serde 'org.apache.hive.hcatalog.data.JsonSerDe' stored as textfile;
+
+per popolare la tabella persona usiamo 
+
+hdfs dfs -put ElencoPersone hivemetastore/provaintermedia.db/persona
+
+create table if not exists citta(luogoAbitazione string,provincia string) row format serde 'org.apache.hive.hcatalog.data.JsonSerDe' stored as textfile;
+
+create table if not exists linguaggi(array<struct<nomeLinguaggio string,descrizioneLinguaggio string, livelloConfidenza int>>) row format serde 'org.apache.hive.hcatalog.data.JsonSerDe' stored as textfile;
